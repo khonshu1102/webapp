@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'master'
     }
+    environment {
+        SONAR_TOKEN = '2002d4b8d224f15036c51bfe230eb653fcd0eed4'
+    }
     stages {
         stage('Build') {
             steps {
@@ -28,7 +31,7 @@ pipeline {
         }
         stage('Sonar-Report') {
             steps {
-                bat 'mvn clean install sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.analysis.mode=publish'
+                bat 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=khonshu1102_webapp'
             }
         }
     }
